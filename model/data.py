@@ -40,6 +40,18 @@ class DataSet:
         self.offset = offset
         self.records = records
 
+    def findAStation(self, station, city, state):
+        target_result = None
+        try:
+            target_result = list(filter(lambda e: e.station == station and e.city ==
+                                        city and e.state == state, self.records))[0]
+        except IndexError:
+            target_result = None
+        except Exception:
+            target_result = None
+        finally:
+            return target_result
+
     @staticmethod
     def fromJSON(jsonObject):
         return DataSet(jsonObject.get('indexName'), jsonObject.get('created'), jsonObject.get('updated'), jsonObject.get('title'), jsonObject.get('description'), jsonObject.get('count'), jsonObject.get('limit'), jsonObject.get('total'), jsonObject.get('offset'), list(map(lambda e: Record.fromJSON(e), jsonObject.get('records').get('all'))))
