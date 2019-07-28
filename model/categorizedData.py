@@ -1,31 +1,18 @@
 #!/usr/bin/python3
 
 
-class Pollutant:
-    def __init__(self, pollutantId: str, pollutantUnit: str, pollutantMin: float, pollutantMax: float, pollutantAvg: float, timeStamp: int):
-        self.pollutantId = pollutantId
-        self.pollutantUnit = pollutantUnit
-        self.pollutantMin = pollutantMin
-        self.pollutantMax = pollutantMax
-        self.pollutantAvg = pollutantAvg
-        self.timeStamp = timeStamp
-
-    @staticmethod
-    def getInstance(fromObject):
-        pass
-
-
 class Station:
-    def __init__(self, name: str, city: str, state: str, country: str, pollutantStat):
+    def __init__(self, name: str, city: str, state: str, country: str, pollutionStat):
         self.name = name
         self.city = city
         self.state = state
         self.country = country
-        self.pollutantStat = pollutantStat
+        self.pollutionStat = pollutionStat
 
     @staticmethod
-    def getInstance(fromObject):
-        pass
+    def fromObject(dataObject):
+        tmpObject = list(dataObject.values())[0]
+        return Station(tmpObject.station, tmpObject.city, tmpObject.state, tmpObject.country, map(lambda e: (e[0], e[1].pollutants), filter(lambda e: e[1] is not None, dataObject.items())))
 
 
 if __name__ == "__main__":
