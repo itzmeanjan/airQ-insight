@@ -1,18 +1,16 @@
 #!/usr/bin/python3
 
 from functools import reduce
+try:
+    from model.categorizedData import Station
+except ImportError as e:
+    print('[!]Module Unavailable : {}'.format(str(e)))
+    exit(1)
 
 
-def buildIt(dataObject):
-    target_result = None
-    try:
-        reduce(lambda acc, cur: acc + [reduce(lambda innerAcc, innerCur: dict([(k, v) for k, v in innerAcc.items()] + [(innerAcc.updated, innerCur.findAStation(cur.station, cur.city, cur.state))]),
-                                              dataObject, {})], reduce(
-            lambda acc, cur: (cur if(len(cur.records) > len(acc.records)) else acc) if(acc is not None) else cur, dataObject, None).records, [])
-    except Exception:
-        target_result = None
-    finally:
-        return target_result
+def buildIt(allStationHolderObject, dataObject):
+    return map(lambda e: Station.fromObject(e), reduce(lambda acc, cur: acc + [reduce(lambda innerAcc, innerCur: dict([(k, v) for k, v in innerAcc.items()] + [(innerCur.updated, innerCur.findAStation(cur.station, cur.city, cur.state))]),
+                                                                                      dataObject, {})], allStationHolderObject, []))
 
 
 if __name__ == "__main__":
