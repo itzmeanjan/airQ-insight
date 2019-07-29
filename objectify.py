@@ -8,6 +8,10 @@ except ImportError as e:
     print('[!]Module Unavailable : {}'.format(str(e)))
     exit(1)
 
+'''
+    Reads JSON data from a certain file, whose path is supplied as parameter,
+    objectifies data ( collected by all monitoring stations present all over India ) & returns an instance of `DataSet` class
+'''
 
 def buildObject(target_file: str):
     target_result = None

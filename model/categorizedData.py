@@ -1,5 +1,13 @@
 #!/usr/bin/python3
 
+'''
+    Holds all pollutant data collected for last 24 hours time period by
+    a certain monitoring station
+
+    This kind of classification & modulation of dataset is done so that it becomes easier
+    for us to plot that dataset
+'''
+
 
 class Station:
     def __init__(self, name: str, city: str, state: str, country: str, pollutionStat):
