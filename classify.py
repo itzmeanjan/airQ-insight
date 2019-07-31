@@ -16,8 +16,9 @@ except ImportError as e:
 
 
 def buildIt(allStationHolderObject, dataObject):
-    return map(lambda e: Station.fromObject(e), reduce(lambda acc, cur: acc + [reduce(lambda innerAcc, innerCur: dict([(k, v) for k, v in innerAcc.items()] + [(innerCur.updated, innerCur.findAStation(cur.station, cur.city, cur.state))]),
-                                                                                      dataObject, {})], allStationHolderObject, []))
+    return map(lambda e: Station.fromObject(dict(
+        filter(lambda eInner: eInner[1] is not None, e.items()))), reduce(lambda acc, cur: acc + [reduce(lambda innerAcc, innerCur: dict([(k, v) for k, v in innerAcc.items()] + [(innerCur.updated, innerCur.findAStation(cur.station, cur.city, cur.state))]),
+                                                                                                         dataObject, {})], allStationHolderObject, []))
 
 
 if __name__ == "__main__":

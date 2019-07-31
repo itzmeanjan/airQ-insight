@@ -51,6 +51,8 @@ def __plotter__(x_axis, y_axis_min, y_axis_max, y_axis_avg, label: str, pollutan
             # asks matplotlib to save a copy of generated graph into a target file
             # which is `./data/*.svg`, and uses tight fitting
             plt.savefig(target_path, bbox_inches='tight', pad_inches=.5)
+            # closes this figure, otherwise it may lead to huge memory usage
+            plt.close()
         return True
     except Exception:
         return False
@@ -74,14 +76,22 @@ def __plotter__(x_axis, y_axis_min, y_axis_max, y_axis_avg, label: str, pollutan
 
 def plotIt(dataObject, target_path: str) -> bool:
     try:
+        # label consists of comma seperated station name, city, state & country
         label: str = '{}, {}, {}, {}'.format(
             dataObject.name, dataObject.city, dataObject.state, dataObject.country)
+        # classifying data as per different pollutant type ( by id ), is done here
+        # and returned iterator is used to iterate over each of them, and that is passed
+        # to __plotter__(), which plots dataset for a certain pollutant type ( for this specific monitoring station )
         for k, v in dict(reduce(lambda acc, cur: reduce(lambda accInner, curInner: dict([(i, j) for i, j in accInner.items()] + [(curInner.pollutantId, accInner.get(curInner.pollutantId, []) + [(cur[0], curInner.pollutantMin, curInner.pollutantMax, curInner.pollutantAvg)])]),
                                                         cur[1], acc), dataObject.pollutionStat, {})).items():
             # we need it to be in descending order
+            # converted to numpy array, so that it can be
+            # manipulated easily i.e. picking up from a certain column
             data = plt.np.array(sorted(v, key=lambda e: e[0]))
             __plotter__(list(map(lambda e: datetime.fromtimestamp(
-                e), data[:, 0])), data[:, 1], data[:, 2], data[:, 3], label, k, join(target_path, '{}_{}.svg'.format(label, k)))
+                e), data[:, 0])), data[:, 1], data[:, 2], data[:, 3], label, k, join(target_path, '{}_{}.svg'.format('_'.join(map(lambda e: e.strip(), label.split(','))), k)))
+        else:
+            return True
     except Exception:
         return False
 

@@ -20,7 +20,7 @@ class Station:
     @staticmethod
     def fromObject(dataObject):
         tmpObject = list(dataObject.values())[0]
-        return Station(tmpObject.station, tmpObject.city, tmpObject.state, tmpObject.country, map(lambda e: (e[0], e[1].pollutants), filter(lambda e: e[1] is not None, dataObject.items())))
+        return Station(tmpObject.station, tmpObject.city, tmpObject.state, tmpObject.country, map(lambda e: (e[0], e[1].pollutants), dataObject.items()))
 
 
 if __name__ == "__main__":
