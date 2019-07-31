@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from os import listdir
+from os import listdir, mkdir
 from os.path import dirname, join, abspath, isdir, isfile
 from functools import reduce
 try:
@@ -28,17 +28,23 @@ except ImportError as e:
 '''
 
 
-def app(target_path: str = abspath(join(dirname(__file__), '../airQ/data'))):
-    plotIt(None if(not isdir(target_path)) else next(buildIt(reduce(lambda acc, cur: (cur if(len(cur.records) > len(acc.records)) else acc) if(acc is not None) else cur, filter(lambda e: e is not None, map(lambda e:
-                                                                                                                                                                                                                     buildObject(join(target_path, e)), filter(lambda e: isfile(join(target_path, e)) and e.endswith(
-                                                                                                                                                                                                                         'json'), listdir(path=target_path)))), None).records, filter(lambda e: e is not None, map(lambda e:
-                                                                                                                                                                                                                                                                                                                   buildObject(join(target_path, e)), filter(lambda e: isfile(join(target_path, e)) and e.endswith(
-                                                                                                                                                                                                                                                                                                                       'json'), listdir(path=target_path)))))))
+def app(source_path: str = abspath(join(dirname(__file__), '../airQ/data')), sink_path: str = abspath(join(dirname(__file__), 'data'))) -> bool:
+    try:
+        if(not isdir(sink_path)):
+            mkdir(sink_path)
+        plotIt(None if(not isdir(source_path)) else next(buildIt(reduce(lambda acc, cur: (cur if(len(cur.records) > len(acc.records)) else acc) if(acc is not None) else cur, filter(lambda e: e is not None, map(lambda e:
+                                                                                                                                                                                                                  buildObject(join(source_path, e)), filter(lambda e: isfile(join(source_path, e)) and e.endswith(
+                                                                                                                                                                                                                      'json'), listdir(path=source_path)))), None).records, filter(lambda e: e is not None, map(lambda e:
+                                                                                                                                                                                                                                                                                                                buildObject(join(source_path, e)), filter(lambda e: isfile(join(source_path, e)) and e.endswith(
+                                                                                                                                                                                                                                                                                                                    'json'), listdir(path=source_path)))))), sink_path)
+        return True
+    except Exception:
+        return False
 
 
 if __name__ == '__main__':
     try:
-        app()
+        print('success' if app() else 'failure')
     except KeyboardInterrupt:
         print('\n[!]Terminated')
     finally:
