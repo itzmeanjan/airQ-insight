@@ -24,16 +24,19 @@ sys	0m16.344s
 I'd like to request you to go through codebase _( which is well documented & pretty much self explanatory )_ & it extensively uses **Lazy computation**, using modern functional syntax of _Python_ i.e. _map()_, _reduce()_, _filter()_, _all()_, _any()_
 ## how does it look ?
 ### `CO` @ Golden Temple
-![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_CO](./data/Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_CO.svg)
+![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_CO](./data/Golden%20Temple_Amritsar%20-%20PPCB_Amritsar_Punjab_India_CO.svg)
 ### `NH3` @ Golden Temple
-![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_NH3](./data/Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_NH3.svg)
+![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_NH3](./data/Golden%20Temple_Amritsar%20-%20PPCB_Amritsar_Punjab_India_NH3.svg)
 ### `NO2` @ Golden Temple
-![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_NO2](./data/Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_NO2.svg)
+![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_NO2](./data/Golden%20Temple_Amritsar%20-%20PPCB_Amritsar_Punjab_India_NO2.svg)
 ### `OZONE` @ Golden Temple
-![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_OZONE](./data/Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_OZONE.svg)
+![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_OZONE](./data/Golden%20Temple_Amritsar%20-%20PPCB_Amritsar_Punjab_India_OZONE.svg)
 ### `PM2.5` @ Golden Temple
-![Golde Temple_Amritsar - PPCB_Amritsar_Punjab_India_PM2.5](./data/Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_PM2.5.svg)
+![Golde Temple_Amritsar - PPCB_Amritsar_Punjab_India_PM2.5](./data/Golden%20Temple_Amritsar%20-%20PPCB_Amritsar_Punjab_India_PM2.5.svg)
 ### `PM10` @ Golden Temple
-![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_PM10](./data/Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_PM10.svg)
+![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_PM10](./data/Golden%20Temple_Amritsar%20-%20PPCB_Amritsar_Punjab_India_PM10.svg)
 ### `SO2` @ Golden Temple
-![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_SO2](./data/Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_SO2.svg)
+![Golden Temple_Amritsar - PPCB_Amritsar_Punjab_India_SO2](./data/Golden%20Temple_Amritsar%20-%20PPCB_Amritsar_Punjab_India_SO2.svg)
+
+
+_Hoping it helps,_ :wink:
