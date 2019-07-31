@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
-from os import listdir, mkdir, rmdir
+from os import listdir, mkdir
 from os.path import dirname, join, abspath, isdir, isfile
+from shutil import rmtree
 from functools import reduce
 try:
     from objectify import buildObject
@@ -43,7 +44,7 @@ def app(source_path: str = abspath(join(dirname(__file__), '../airQ/data')), sin
         # first emptying already existing one
         # then recreates it
         else:
-            rmdir(sink_path)
+            rmtree(sink_path, ignore_errors=True)
             mkdir(sink_path)
         return all(map(lambda e: plotIt(e, sink_path), None if(not isdir(source_path)) else buildIt(reduce(lambda acc, cur: (cur if(len(cur.records) > len(acc.records)) else acc) if(acc is not None) else cur, filter(lambda e: e is not None,
                                                                                                                                                                                                                         map(lambda e:
@@ -55,7 +56,8 @@ def app(source_path: str = abspath(join(dirname(__file__), '../airQ/data')), sin
                                                                                                                                                                                                                                                                                                                                    join(source_path, e)),
                                                                                                                                                                                                                                                                                                                                filter(lambda e: isfile(join(source_path, e)) and e.endswith(
                                                                                                                                                                                                                                                                                                                                    'json'), listdir(path=source_path))))))))
-    except Exception:
+    except Exception as e:
+        print(e)
         return False
 
 
