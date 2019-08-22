@@ -1,0 +1,10 @@
+[Unit]
+Description=Graph generator, using airQ collected data
+Requires=airQ-insight.service
+
+[Timer]
+Unit=airQ-insight.service
+OnUnitInactiveSec=1h
+
+[Install]
+WantedBy=timers.target
