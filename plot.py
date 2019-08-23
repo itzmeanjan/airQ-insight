@@ -17,7 +17,7 @@ except ImportError as e:
 '''
 
 
-def __plotter__(x_axis, y_axis_min, y_axis_max, y_axis_avg, label: str, pollutantId: str, target_path: str) -> bool:
+def __plotter__(x_axis, y_axis_min, y_axis_max, y_axis_avg, label, pollutantId, target_path):
     try:
         with plt.style.context(('ggplot')):
             # common font style
@@ -74,7 +74,7 @@ def __plotter__(x_axis, y_axis_min, y_axis_max, y_axis_avg, label: str, pollutan
 '''
 
 
-def plotIt(dataObject, target_path: str) -> bool:
+def plotIt(dataObject, target_path):
     try:
         # label consists of comma seperated station name, city, state & country
         label: str = '{}, {}, {}, {}'.format(

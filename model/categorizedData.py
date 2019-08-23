@@ -10,7 +10,7 @@
 
 
 class Station:
-    def __init__(self, name: str, city: str, state: str, country: str, pollutionStat):
+    def __init__(self, name, city, state, country, pollutionStat):
         self.name = name
         self.city = city
         self.state = state

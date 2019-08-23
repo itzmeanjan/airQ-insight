@@ -13,7 +13,8 @@ except ImportError as e:
     objectifies data ( collected by all monitoring stations present all over India ) & returns an instance of `DataSet` class
 '''
 
-def buildObject(target_file: str):
+
+def buildObject(target_file):
     target_result = None
     try:
         if(not isfile(target_file)):

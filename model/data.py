@@ -7,7 +7,7 @@
 
 
 class Pollutant:
-    def __init__(self, pollutantId: str, pollutantUnit: str, pollutantMin: float, pollutantMax: float, pollutantAvg: float):
+    def __init__(self, pollutantId, pollutantUnit, pollutantMin, pollutantMax, pollutantAvg):
         self.pollutantId = pollutantId
         self.pollutantUnit = pollutantUnit
         self.pollutantMin = pollutantMin
@@ -29,7 +29,7 @@ class Pollutant:
 
 
 class Record:
-    def __init__(self, station: str, city: str, state: str, country: str, pollutants):
+    def __init__(self, station, city, state, country, pollutants):
         self.station = station
         self.city = city
         self.state = state
@@ -55,7 +55,7 @@ class Record:
 
 
 class DataSet:
-    def __init__(self, indexName: str, created: int, updated: int, title: str, description: str, dataCount: int, limit: int, total: int, offset: int, records):
+    def __init__(self, indexName, created, updated, title, description, dataCount, limit, total, offset, records):
         self.indexName = indexName
         self.created = created
         self.updated = updated

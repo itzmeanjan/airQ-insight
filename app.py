@@ -36,7 +36,7 @@ except ImportError as e:
 '''
 
 
-def app(source_path: str = abspath(join(dirname(__file__), '../airQ/data')), sink_path: str = abspath(join(dirname(__file__), 'data'))) -> bool:
+def app(source_path=abspath(join(dirname(__file__), '../airQ/data')), sink_path=abspath(join(dirname(__file__), 'data'))):
     try:
         # creates directory if not present
         if(not isdir(sink_path)):
