@@ -37,6 +37,17 @@ except ImportError as e:
 
 
 def app(source_path=abspath(join(dirname(__file__), '../airQ/data')), sink_path=abspath(join(dirname(__file__), 'data'))):
+    def __objectify__():
+        return list(filter(lambda e: e is not None, map(lambda e:
+                                                        buildObject(
+                                                            join(source_path, e)),
+                                                        filter(lambda e: isfile(join(source_path, e)) and e.endswith(
+                                                            'json'), listdir(path=source_path)))))
+
+    def __getStations__(object):
+        return reduce(lambda acc, cur: cur if acc is None else acc if len(
+            acc.records) > len(cur.records) else cur, object, None).records
+
     try:
         # creates directory if not present
         if(not isdir(sink_path)):
@@ -46,16 +57,8 @@ def app(source_path=abspath(join(dirname(__file__), '../airQ/data')), sink_path=
         else:
             rmtree(sink_path, ignore_errors=True)
             mkdir(sink_path)
-        return all(map(lambda e: plotIt(e, sink_path), None if(not isdir(source_path)) else buildIt(reduce(lambda acc, cur: (cur if(len(cur.records) > len(acc.records)) else acc) if(acc is not None) else cur, filter(lambda e: e is not None,
-                                                                                                                                                                                                                        map(lambda e:
-                                                                                                                                                                                                                            buildObject(
-                                                                                                                                                                                                                                join(source_path, e)),
-                                                                                                                                                                                                                            filter(lambda e: isfile(join(source_path, e)) and e.endswith(
-                                                                                                                                                                                                                                'json'), listdir(path=source_path)))), None).records, list(filter(lambda e: e is not None, map(lambda e:
-                                                                                                                                                                                                                                                                                                                               buildObject(
-                                                                                                                                                                                                                                                                                                                                   join(source_path, e)),
-                                                                                                                                                                                                                                                                                                                               filter(lambda e: isfile(join(source_path, e)) and e.endswith(
-                                                                                                                                                                                                                                                                                                                                   'json'), listdir(path=source_path))))))))
+        tmpObject = __objectify__()
+        return all(map(lambda e: plotIt(e, sink_path), None if(not isdir(source_path)) else buildIt(__getStations__(tmpObject), tmpObject)))
     except Exception as e:
         print(e)
         return False
