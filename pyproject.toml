@@ -1,0 +1,15 @@
+[build-system]
+requires = ["flit_core >=2,<3"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "airQInsight"
+author = "Anjan Roy"
+author-email = "anjanroy@yandex.com"
+home-page = "https://github.com/itzmeanjan/airQ-insight/"
+classifiers = ["License :: OSI Approved :: MIT License"]
+description-file="README.md"
+requires-python=">=3.7"
+
+[tool.flit.scripts]
+airQ = "airQInsight.app:main"
