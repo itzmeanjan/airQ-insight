@@ -1,1 +1,2 @@
-airQ==0.3.0
+matplotlib==3.0.2
+airQ==0.3.1
