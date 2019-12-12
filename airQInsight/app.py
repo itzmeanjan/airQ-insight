@@ -5,7 +5,7 @@ from typing import Tuple
 from sys import argv
 from os.path import exists, dirname, abspath
 from os import mkdir
-from .util import parseData
+from .util import parseData, plotData
 
 
 def _makeDirectoryIfNotExistings(targetPath: str):
@@ -24,8 +24,7 @@ def main():
     if not source or not sink:
         return False
     _makeDirectoryIfNotExistings(sink)
-    data = parseData(source)
-    return data
+    plotData(parseData(source), sink)
 
 
 if __name__ == '__main__':
