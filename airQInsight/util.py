@@ -9,20 +9,14 @@ from matplotlib import pyplot as plt
 from matplotlib.dates import HourLocator, DateFormatter, MinuteLocator
 from matplotlib.animation import FuncAnimation
 from os.path import join
-
-
-class DataRange(object):
-    def __init__(self, frm: int, to: int):
-        self.frm = frm
-        self.to = to
-
-    def update(self):
-        self.to += 1
-        if self.to - self.frm > 6:
-            self.frm += 1
+from .model import DataRange
 
 
 def parseData(targetPath: str) -> Data:
+    '''
+        Simply returns an instance of airQ.model.data.Data,
+        which is holding airQ collected data ( prior to this run )
+    '''
     return parse(targetPath)
 
 
@@ -32,27 +26,25 @@ def _plotDataForStation(station: str, pollutantID: str, pollutants: List[Tuple[i
         axes.xaxis.set_major_locator(HourLocator())
         axes.xaxis.set_major_formatter(DateFormatter('%d %b, %Y %I:%M %p'))
         axes.xaxis.set_minor_locator(MinuteLocator())
-        axes.tick_params(axis='x', which='major', labelsize=12,
+        axes.tick_params(axis='x', which='major', labelsize=10,
                          labelrotation=75, labelcolor='black')
         axes.tick_params(axis='y', which='major', labelsize=10,
                          labelcolor='black')
         axes.set_title(
             'Air Quality Indicator for {}'.format(station), pad=8)
         axes.legend(
-            [
-                *axes.plot(
-                    _x[dataRange.frm:dataRange.to], _y1[dataRange.frm:dataRange.to], 'c+-',
-                    lw=1.6, markersize=6
-                ),
-                *axes.plot(
-                    _x[dataRange.frm:dataRange.to], _y2[dataRange.frm:dataRange.to], 'm+-',
-                    lw=1.6, markersize=6
-                ),
-                *axes.plot(
-                    _x[dataRange.frm:dataRange.to], _y3[dataRange.frm:dataRange.to], 'rx--',
-                    lw=3.2, markersize=10
-                )
-            ],
+            axes.plot(
+                _x[dataRange.frm:dataRange.to], _y1[dataRange.frm:dataRange.to], 'co-',
+                lw=1.2, markersize=4
+            ) +
+            axes.plot(
+                _x[dataRange.frm:dataRange.to], _y2[dataRange.frm:dataRange.to], 'mo-',
+                lw=1.2, markersize=4
+            ) +
+            axes.plot(
+                _x[dataRange.frm:dataRange.to], _y3[dataRange.frm:dataRange.to], ls='--', marker='o',
+                color='tomato', lw=3, markersize=10, markerfacecolor='red'
+            ),
             [
                 'Minimum Reading',
                 'Maximum Reading',
@@ -73,11 +65,11 @@ def _plotDataForStation(station: str, pollutantID: str, pollutants: List[Tuple[i
                      [e[2] for e in pollutants])
     dataRange = DataRange(0, 1)
     with plt.style.context('Solarize_Light2'):
-        fig = plt.figure(figsize=(16, 9), dpi=100)
+        fig = plt.figure(figsize=(16, 9), dpi=200)
         axes = fig.add_subplot(1, 1, 1)
-        anim = FuncAnimation(fig, animate, interval=2000,
+        anim = FuncAnimation(fig, animate, interval=3600,
                              frames=len(_x))
-        anim.save(targetPath, dpi=100, writer='imagemagick_file')
+        anim.save(targetPath, dpi=200, writer='imagemagick_file')
         plt.close(fig=fig)
 
 
@@ -90,7 +82,8 @@ def plotData(data: Data, targetPath: str) -> bool:
                 j,
                 [(k._min, k._max, k._avg, k.timeStamp)
                     for k in station.getPollutantStatByID(j)],
-                join(targetPath, 'test.gif')
+                join(targetPath, 'airQuality{}.gif'.format(
+                    '_'.join(str(station).split())))
             )
             break
         break
