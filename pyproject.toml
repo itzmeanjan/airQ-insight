@@ -14,5 +14,10 @@ requires-python=">=3.7"
 [tool.flit.metadata.requires-extra]
 dev=["flit"]
 
+[tool.flit.sdist]
+exclude=[
+  "systemd/"
+]
+
 [tool.flit.scripts]
 airQInsight = "airQInsight.app:main"
