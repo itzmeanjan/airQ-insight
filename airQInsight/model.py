@@ -21,7 +21,7 @@ class DataRange(object):
 
     def update(self):
         self.to += 1
-        if self.to - self.frm > 8:
+        if self.to - self.frm > 24:
             self.frm += 1
 
 
