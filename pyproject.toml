@@ -10,6 +10,7 @@ home-page = "https://github.com/itzmeanjan/airQ-insight/"
 classifiers = ["License :: OSI Approved :: MIT License"]
 description-file="README.md"
 requires-python=">=3.7"
+requires = ["matplotlib", "typing", "airQ"]
 
 [tool.flit.metadata.requires-extra]
 dev=["flit"]
