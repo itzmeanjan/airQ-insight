@@ -17,7 +17,8 @@ dev=["flit"]
 
 [tool.flit.sdist]
 exclude=[
-  "systemd/"
+  "systemd/",
+  "airQualityAlipur,Delhi-DPCC,Delhi_PM10_.gif"
 ]
 
 [tool.flit.scripts]
