@@ -4,7 +4,7 @@
 
 Visualization of Air Quality Indication Dataset collected by **airQ** to get deeper insight, written with :heart:
 
-**Accompanying website for Visualization of Air Quality, Coming soon ...** :boss:
+**Accompanying website for Visualization of Air Quality, Coming soon ...** :+1:
 
 ## motivation
 Prior to it, I wrote one simple data collection module, which collects Air Quality Indication Data from Govt. Of India's [Open Data Platform](https://data.gov.in). 
