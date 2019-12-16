@@ -7,7 +7,7 @@ from typing import List, Tuple
 from datetime import datetime
 from matplotlib import pyplot as plt
 from matplotlib.dates import HourLocator, DateFormatter, MinuteLocator
-from matplotlib.ticker import MultipleLocator, NullFormatter, StrMethodFormatter
+from matplotlib.ticker import MultipleLocator, NullFormatter, StrMethodFormatter, NullLocator
 from matplotlib.animation import FuncAnimation
 from os.path import join
 from .model import DataRange
@@ -27,9 +27,12 @@ def _plotDataForStation(station: str, pollutantID: str, pollutants: List[Tuple[i
         axes.xaxis.set_major_locator(HourLocator())
         axes.xaxis.set_major_formatter(DateFormatter('%d %b, %Y %I:%M %p'))
         # axes.xaxis.set_minor_locator(MinuteLocator(interval=15))
-        axes.yaxis.set_major_locator(MultipleLocator(10))
+        axes.yaxis.set_major_locator(
+            MultipleLocator(
+                20 if (top - bottom) // 10 >= 30 else 10)
+        )
         axes.yaxis.set_major_formatter(StrMethodFormatter('{x:,g}'))
-        axes.yaxis.set_minor_locator(MultipleLocator(5))
+        axes.yaxis.set_minor_locator(NullLocator())
         axes.yaxis.set_minor_formatter(NullFormatter())
         axes.set_ylim((bottom, top))
         axes.tick_params(axis='x', which='major', labelsize=10,
